@@ -1,25 +1,25 @@
 <project name="n2n composer local live build" default="build" basedir="../../">
-	<property name="git.repository.onlinefiles" value="" />
-	<property name="dir.build" location="build"/>
-	<property name="dir.target" location="${dir.build}/target"/>
-	<property name="dir.tmp" location="${dir.target}/tmp"/>
-	<property name="dir.tmp.php" location="${dir.tmp}/src-php" />
-	<property name="dir.test" location="${dir.target}/test"/>
+<property name="git.repository.onlinefiles" value="" />
+<property name="dir.build" location="build"/>
+<property name="dir.target" location="${dir.build}/target"/>
+<property name="dir.tmp" location="${dir.target}/tmp"/>
+<property name="dir.tmp.php" location="${dir.tmp}/src-php" />
+<property name="dir.test" location="${dir.target}/test"/>
 
-	<target name="build">
-		<mkdir dir="${dir.tmp}"/>
+<target name="build">
+	<mkdir dir="${dir.tmp}"/>
 
-		<exec executable="git" dir=".">
-			<arg line="checkout-index -a -f --prefix=${dir.tmp}/"/>
-		</exec>
-		<exec executable="git" dir="${dir.tmp}">
-			<arg line="clean -f"/>
-		</exec>
+	<exec executable="git" dir="../">
+		<arg line="checkout-index -a -f --prefix=${dir.tmp}/"/>
+	</exec>
+	<exec executable="git" dir="${dir.tmp}">
+		<arg line="clean -f"/>
+	</exec>
 
-		<copy todir="${dir.target}">
-			<fileset dir="${dir.tmp.php}"/>
-		</copy>
+	<copy todir="${dir.target}">
+		<fileset dir="${dir.tmp.php}"/>
+	</copy>
 
-		<delete dir="${dir.tmp}"/>
-	</target>
+	<delete dir="${dir.tmp}"/>
+</target>
 </project>
