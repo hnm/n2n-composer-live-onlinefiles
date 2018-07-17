@@ -1,4 +1,4 @@
-<project name="n2n composer local live build" default="build" basedir="../../">
+<project name="n2n composer local live build" default="build" basedir="../">
 <property name="git.repository.onlinefiles" value="" />
 <property name="dir.build" location="build"/>
 <property name="dir.target" location="${dir.build}/target"/>
@@ -9,7 +9,7 @@
 <target name="build">
 	<mkdir dir="${dir.tmp}"/>
 
-	<exec executable="git" dir="../">
+	<exec executable="git" dir=".">
 		<arg line="checkout-index -a -f --prefix=${dir.tmp}/"/>
 	</exec>
 	<exec executable="git" dir="${dir.tmp}">
