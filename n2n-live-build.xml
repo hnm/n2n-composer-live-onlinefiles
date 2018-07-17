@@ -2,6 +2,7 @@
 	<property name="git.repository.onlinefiles" value="" />
 	<property name="dir.build" location="build"/>
 	<property name="dir.target" location="${dir.build}/target"/>
+	<property name="dir.onlinefiles" location="${dir.build}/onlinefiles"/>
 	<property name="dir.tmp" location="${dir.target}/tmp"/>
 	<property name="dir.tmp.php" location="${dir.tmp}/src-php" />
 	<property name="dir.test" location="${dir.target}/test"/>
@@ -21,5 +22,9 @@
 		</copy>
 
 		<delete dir="${dir.tmp}"/>
+		
+		<copy todir="${dir.target}" force="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="${dir.onlinefiles}" includes="**/*"  />
+		</copy>
 	</target>
 </project>
