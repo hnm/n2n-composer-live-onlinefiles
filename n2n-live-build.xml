@@ -52,11 +52,6 @@
 			<fileset dir="${dir.tmp.php}/${lib.dirname}" />
 		</copy>
 
-		<mkdir dir="${dir.target}/${vendor.dirname}" />
-		<copy todir="${dir.target}/${vendor.dirname}" preservelastmodified="true">
-			<fileset dir="${dir.tmp.php}/${vendor.dirname}" />
-		</copy>
-
 		<mkdir dir="${dir.target}/${var.dirname}" />
 		<copy todir="${dir.target}/${var.dirname}" preservelastmodified="true">
 			<fileset dir="${dir.target}/${var.dirname}" includes="**/*">
