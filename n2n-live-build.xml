@@ -32,8 +32,13 @@
 		
 		<echo message="copy to ${dir.target}" />
 
-		<mkdir dir="${dir.target}/${public.dirname}" />
+		<copy todir="${dir.target}" preservelastmodified="true">
+			<fileset dir="${dir.tmp.php}" includes="**/*">
+				<include name="composer.*" />
+			</fileset>
+		</copy>
 
+		<mkdir dir="${dir.target}/${public.dirname}" />
 		<copy todir="${dir.target}/${public.dirname}" preservelastmodified="true">
 			<fileset dir="${dir.tmp.php}/${public.dirname}" includes="**/*">
 				<exclude name="${public.writable.dirname}/*/**" />
@@ -53,7 +58,7 @@
 
 		<mkdir dir="${dir.target}/${var.dirname}" />
 		<copy todir="${dir.target}/${var.dirname}" preservelastmodified="true">
-			<fileset dir="${dir.target}/${var.dirname}" includes="**/*">
+			<fileset dir="${dir.tmp.php}/${var.dirname}" includes="**/*">
 				<exclude name="bak/**/*" />
 				<exclude name="log/**/*" />
 				<exclude name="srv/**/batch/**"/>
