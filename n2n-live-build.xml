@@ -16,7 +16,6 @@
 	<property name="vendor.dirname" value="vendor" />
 
 	<property name="publish.dir" location=".published.default.live" ></property>
-	<property name="publish.onlinefiles.dir" location="${publish.dir}/onlinefiles" />
 	<property name="publish.tmp.dir" location="${publish.dir}/tmp" />
 	<property name="publish.tmp.assets.dir" location="${publish.tmp.dir}/${public.dirname}/assets" />
 	<property name="publish.tmp.dump.dir" location="${publish.dir}/dump" />
@@ -61,10 +60,6 @@
 
 				<exclude name="tmp/**/*"/>
 			</fileset>
-		</copy>
-
-		<copy todir="${dir.target}" force="true" overwrite="true" preservelastmodified="true">
-			<fileset dir="${publish.onlinefiles.dir}" includes="**/*"  />
 		</copy>
 
 		<delete dir="${dir.tmp}"/>
