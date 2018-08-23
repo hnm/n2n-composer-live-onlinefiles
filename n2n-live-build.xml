@@ -6,6 +6,20 @@
 	<property name="dir.tmp" location="${dir.target}/tmp"/>
 	<property name="dir.tmp.php" location="${dir.tmp}/src-php" />
 	<property name="dir.test" location="${dir.target}/test"/>
+	
+	<property name="public.dirname" value="public" />
+	<property name="public.writable.dirname" value="files" />
+
+	<property name="app.dirname" value="app" />
+	<property name="var.dirname" value="var" />
+	<property name="lib.dirname" value="lib" />
+	<property name="vendor.dirname" value="vendor" />
+
+	<property name="publish.dir" location=".published.default.live" ></property>
+	<property name="publish.onlinefiles.dir" location="${publish.dir}/onlinefiles" />
+	<property name="publish.tmp.dir" location="${publish.dir}/tmp" />
+	<property name="publish.tmp.assets.dir" location="${publish.tmp.dir}/${public.dirname}/assets" />
+	<property name="publish.tmp.dump.dir" location="${publish.dir}/dump" />
 
 	<target name="build">
 		<mkdir dir="${dir.tmp}"/>
@@ -16,9 +30,46 @@
 		<exec executable="git" dir="${dir.tmp}">
 			<arg line="clean -f"/>
 		</exec>
+		
+		<echo message="copy to ${dir.target}" />
 
-		<copy todir="${dir.target}">
-			<fileset dir="${dir.tmp.php}"/>
+		<mkdir dir="${dir.target}/${public.dirname}" />
+
+		<copy todir="${dir.target}/${public.dirname}" preservelastmodified="true">
+			<fileset dir="${dir.tmp.php}/${public.dirname}" includes="**/*">
+				<exclude name="${public.writable.dirname}/*/**" />
+				<exclude name="**/*.scss" />
+			</fileset>
+		</copy>
+
+		<mkdir dir="${dir.target}/${app.dirname}" />
+		<copy todir="${dir.target}/${app.dirname}" preservelastmodified="true">
+			<fileset dir="${dir.tmp.php}/${app.dirname}" />
+		</copy>
+
+		<mkdir dir="${dir.target}/${lib.dirname}" />
+		<copy todir="${dir.target}/${lib.dirname}" preservelastmodified="true">
+			<fileset dir="${dir.tmp.php}/${lib.dirname}" />
+		</copy>
+
+		<mkdir dir="${dir.target}/${vendor.dirname}" />
+		<copy todir="${dir.target}/${vendor.dirname}" preservelastmodified="true">
+			<fileset dir="${dir.tmp.php}/${vendor.dirname}" />
+		</copy>
+
+		<mkdir dir="${dir.target}/${var.dirname}" />
+		<copy todir="${dir.target}/${var.dirname}" preservelastmodified="true">
+			<fileset dir="${dir.target}/${var.dirname}" includes="**/*">
+				<exclude name="bak/**/*" />
+				<exclude name="log/**/*" />
+				<exclude name="srv/**/batch/**"/>
+
+				<exclude name="tmp/**/*"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${dir.target}" force="true" overwrite="true" preservelastmodified="true">
+			<fileset dir="${publish.onlinefiles.dir}" includes="**/*"  />
 		</copy>
 
 		<delete dir="${dir.tmp}"/>
