@@ -33,8 +33,7 @@
 		<echo message="copy to ${dir.target}" />
 
 		<copy todir="${dir.target}" preservelastmodified="true">
-			<fileset dir="${dir.tmp.php}" includes="**/*">
-				<include name="composer.*" />
+			<fileset dir="${dir.tmp.php}" includes="composer.*">
 			</fileset>
 		</copy>
 
@@ -62,7 +61,6 @@
 				<exclude name="bak/**/*" />
 				<exclude name="log/**/*" />
 				<exclude name="srv/**/batch/**"/>
-
 				<exclude name="tmp/**/*"/>
 			</fileset>
 		</copy>
