@@ -15,11 +15,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [L]
 
 
-RewriteCond %{HTTP_HOST} !^www\.
-RewriteRule (.*) http://www.%{HTTP_HOST}/$1 [R=301,L]
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule (.*) http://www.%{HTTP_HOST}/$1 [R=301,L]
 
-RewriteCond %{HTTPS} off
-RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#RewriteCond %{HTTPS} off
+#RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 #RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
