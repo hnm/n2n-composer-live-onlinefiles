@@ -1,6 +1,5 @@
 <project name="n2n composer local live build" default="build" basedir="../">
-	<property name="dir.work" value="${workingdir}" />
-	<property name="dir.build" location="build/${dir.work}"/>
+	<property name="dir.build" location="build"/>
 	<property name="dir.target" location="${dir.build}/target"/>
 	<property name="dir.onlinefiles" location="${dir.build}/onlinefiles"/>
 	<property name="dir.tmp" location="${dir.target}/tmp"/>
