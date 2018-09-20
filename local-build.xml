@@ -1,7 +1,6 @@
-<project name="n2n composer local live build" default="build" basedir="../">
-	<property name="dir.build" location="build"/>
-	<property name="dir.target" location="${dir.build}/target"/>
-	<property name="dir.onlinefiles" location="${dir.build}/onlinefiles"/>
+<project name="n2n composer local live build" default="build" basedir=".">
+	<property name="dir.target" location="target"/>
+	<property name="dir.onlinefiles" location="onlinefiles"/>
 	<property name="dir.tmp" location="${dir.target}/tmp"/>
 	<property name="dir.tmp.php" location="${dir.tmp}/src-php" />
 	<property name="dir.test" location="${dir.target}/test"/>
