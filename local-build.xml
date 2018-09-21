@@ -1,10 +1,10 @@
-<project name="n2n composer local live build" default="build" basedir="../">
-	<property name="dir.build" location="build"/>
-	<property name="dir.target" location="${dir.build}/target"/>
-	<property name="dir.onlinefiles" location="${dir.build}/onlinefiles"/>
+<project name="n2n composer local live build" default="build" basedir=".">
+	<property name="dir.target" location="target"/>
+	<property name="dir.onlinefiles" location="onlinefiles"/>
 	<property name="dir.tmp" location="${dir.target}/tmp"/>
 	<property name="dir.tmp.php" location="${dir.tmp}/src-php" />
 	<property name="dir.test" location="${dir.target}/test"/>
+	<property name="dir.project" location="../../"/>
 	
 	<property name="public.dirname" value="public" />
 	<property name="public.writable.dirname" value="files" />
@@ -22,7 +22,7 @@
 	<target name="build">
 		<mkdir dir="${dir.tmp}"/>
 
-		<exec executable="git" dir=".">
+		<exec executable="git" dir="${dir.project}">
 			<arg line="checkout-index -a -f --prefix=${dir.tmp}/"/>
 		</exec>
 		<exec executable="git" dir="${dir.tmp}">

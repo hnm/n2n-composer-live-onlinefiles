@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<project name="ftp-deploy" default="upload" basedir=".">
+<property file="ftp-deploy.properties" />
+	<property name="public.dirname" value="public" />
+	<property name="app.dirname" value="app" />
+	<property name="var.dirname" value="var" />
+	<property name="lib.dirname" value="lib" />
+	<property name="vendor.dirname" value="vendor" />
+	<property name="public.writable.dirname" value="files" />
+	
+	<property name="deploy.dir" location="target/" />
+
+	<property name="remote.public.dirperm" value="0755" />
+	<property name="remote.public.fileperm" value="0644" />
+	<property name="remote.public.writableDirperm" value="0755" />
+	<property name="remote.public.writableFileperm" value="0644" />
+	<property name="remote.private.dirperm" value="0700" />
+	<property name="remote.private.fileperm" value="0600" />
+	<property name="remote.private.writableDirperm" value="0700" />
+	<property name="remote.private.writableFileperm" value="0600" />
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
+	<taskdef resource="ch/hnm/antftp/antlib.xml"/>
+
+	<target name="upload">
+		<fail unless="ftp.host">Property 'ftp.host' not set!</fail>
+		<fail unless="ftp.user">Property 'ftp.user' not set!</fail>
+		<fail unless="ftp.password">Property 'ftp.password' not set!</fail>
+		<fail unless="remote.public.dir">Property 'remote.public.dir' not set!</fail>
+		<fail unless="remote.app.dir">Property 'remote.app.dir' not set!</fail>
+		<fail unless="remote.lib.dir">Property 'remote.lib.dir' not set!</fail>
+		<fail unless="remote.var.dir">Property 'remote.var.dir' not set!</fail>
+		<fail unless="remote.vendor.dir">Property 'remote.vendor.dir' not set!</fail>
+		
+		<condition property="project.setup" value="true">
+			<and>
+				<available file="${deploy.dir}/${public.dirname}" type="dir"/>
+				<available file="${deploy.dir}/${app.dirname}" type="dir"/>
+				<available file="${deploy.dir}/${lib.dirname}" type="dir"/>
+				<available file="${deploy.dir}/${var.dirname}" type="dir"/>
+				<available file="${deploy.dir}/${vendor.dirname}" type="dir"/>
+			</and>
+		</condition>
+		
+		<fail unless="project.setup">Project is not set up correctly!</fail>
+
+		<hnmftp host="${ftp.host}" user="${ftp.user}" password="${ftp.password}" ipV4="true" checkTimeDiff="${remote.public.dir}" mode="ftp" verify="false">
+			<send remoteDir="${remote.public.dir}" depends="true">
+				<ftpfileset dir="${deploy.dir}/${public.dirname}" dirPerm="${remote.public.dirperm}" filePerm="${remote.public.fileperm}">
+					<include name="**" />
+					<exclude name="${public.writable.dirname}/**" />
+				</ftpfileset>
+				<ftpfileset dir="${deploy.dir}/${public.dirname}" dirPerm="${remote.public.writableDirperm}" filePerm="${remote.public.writableFileperm}">
+					<include name="${public.writable.dirname}/**" />
+				</ftpfileset>
+			</send>
+
+			<send remoteDir="${remote.app.dir}" depends="true">
+				<ftpfileset dir="${deploy.dir}/${app.dirname}" dirPerm="${remote.private.dirperm}" filePerm="${remote.private.fileperm}">
+					<include name="**" />
+				</ftpfileset>
+			</send>
+
+			<send remoteDir="${remote.var.dir}" depends="true">
+				<ftpfileset dir="${deploy.dir}/${var.dirname}" dirPerm="${remote.private.writableDirperm}" filePerm="${remote.private.writableFileperm}">
+					<include name="**" />
+				</ftpfileset>
+			</send>
+
+			<send remoteDir="${remote.lib.dir}" depends="true">
+				<ftpfileset dir="${deploy.dir}/${lib.dirname}" dirPerm="${remote.private.dirperm}" filePerm="${remote.private.fileperm}">
+					<include name="**" />
+				</ftpfileset>
+			</send>
+
+			<send remoteDir="${remote.vendor.dir}" depends="true">
+				<ftpfileset dir="${deploy.dir}/${vendor.dirname}" dirPerm="${remote.private.dirperm}" filePerm="${remote.private.fileperm}">
+					<include name="**" />
+				</ftpfileset>
+			</send>
+		</hnmftp>
+	</target>
+</project>
