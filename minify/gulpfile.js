@@ -6,7 +6,7 @@ var uglify = uglyComposer(uglifyes, console);
 let cleanCSS = require('gulp-clean-css');
 
 gulp.task('uglify-js', function () {
-	return gulp.src('../target/public/assets/**/*.js').pipe(uglifyes()).pipe(gulp.dest('../target/public/assets'));
+	return gulp.src('../target/public/assets/**/*.js').pipe(uglifyes({ keep_classnames: true, keep_fnames: true })).pipe(gulp.dest('../target/public/assets'));
 });
 
 //gulp.task('minify-css', function (){
