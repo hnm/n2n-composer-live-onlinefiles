@@ -6,7 +6,9 @@ var uglify = uglyComposer(uglifyes, console);
 let cleanCSS = require('gulp-clean-css');
 
 gulp.task('uglify-js', function () {
-	return gulp.src('../target/public/assets/**/*.js').pipe(uglifyes({ keep_classnames: true, keep_fnames: true })).pipe(gulp.dest('../target/public/assets'));
+	return gulp.src(['../target/public/assets/**/*.js', '!../target/public/assets/**/+(thirdparty|dist)/**'])
+			.pipe(uglifyes({ keep_classnames: true, keep_fnames: true }))
+			.pipe(gulp.dest('../target/public/assets'));
 });
 
 //gulp.task('minify-css', function (){
@@ -19,12 +21,12 @@ gulp.task('uglify-js', function () {
 
 
 gulp.task('minify-css', () => {
-  return gulp.src('../target/public/assets/**/*.css')
-    .pipe(cleanCSS({debug: true}, (details) => {
-      console.log(`${details.name}: ${details.stats.originalSize}`);
-      console.log(`${details.name}: ${details.stats.minifiedSize}`);
-    }))
-  .pipe(gulp.dest('../target/public/assets'));
+	return gulp.src(['../target/public/assets/**/*.css', '!../target/public/assets/**/+(thirdparty|dist)/**'])
+			.pipe(cleanCSS({debug: true}, (details) => {
+	  			console.log(`${details.name}: ${details.stats.originalSize}`);
+	  			console.log(`${details.name}: ${details.stats.minifiedSize}`);
+	  		}))
+	  		.pipe(gulp.dest('../target/public/assets'));
 });
 
-gulp.task('minify', gulp.series('uglify-js', 'minify-css'));
+gulp.task('minify', gulp.parallel('uglify-js', 'minify-css'));
