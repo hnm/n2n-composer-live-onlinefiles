@@ -4,6 +4,9 @@
 # <IfModule mod_security2.c>
 #        SecRuleRemoveById 390707
 #        SecRuleRemoveById 932150
+#        SecRuleRemoveById 932100
+#        SecFilterEngine Off
+#        SecFilterScanPOST Off
 # </IfModule>
 
 # END CYON 
