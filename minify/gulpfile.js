@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var uglifyes = require('gulp-uglify-es').default;
 var uglyComposer = require('gulp-uglify/composer');
+var imagemin = require('gulp-imagemin');
 var uglify = uglyComposer(uglifyes, console);
 //var csso = require('gulp-csso');
 let cleanCSS = require('gulp-clean-css');
@@ -19,6 +20,11 @@ gulp.task('uglify-js', function () {
 //    })).pipe(gulp.dest('../target/public/assets'));
 //});
 
+gulp.task('minify-images', () =>
+	gulp.src(['../target/public/assets/**/*.png', '../target/public/assets/**/*.jpg', '../target/public/assets/**/*.jpeg'])
+		.pipe(imagemin())
+		.pipe(gulp.dest('../target/public/assets'))
+);
 
 gulp.task('minify-css', () => {
 	return gulp.src(['../target/public/assets/**/*.css', '!../target/public/assets/**/+(thirdparty|dist)/**'])
@@ -29,4 +35,4 @@ gulp.task('minify-css', () => {
 	  		.pipe(gulp.dest('../target/public/assets'));
 });
 
-gulp.task('minify', gulp.parallel('uglify-js', 'minify-css'));
+gulp.task('minify', gulp.parallel('uglify-js', 'minify-css', 'minify-images'));
