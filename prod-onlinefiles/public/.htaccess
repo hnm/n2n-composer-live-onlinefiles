@@ -15,6 +15,8 @@
 
 # AddHandler application/x-httpd-php72 .php
 
+# SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+
 # END HOSTPOINT
 
 RewriteEngine on
