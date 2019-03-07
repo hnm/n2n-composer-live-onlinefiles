@@ -44,8 +44,8 @@
 		
 		<fail unless="project.setup">Project is not set up correctly!</fail>
 
-		<hnmftp host="${ftp.host}" user="${ftp.user}" password="${ftp.password}" ipV4="true" checkTimeDiff="${remote.public.dir}" mode="ftp" verify="false">
-			<send remoteDir="${remote.public.dir}" depends="true">
+		<hnmftp host="${ftp.host}" user="${ftp.user}" password="${ftp.password}" ipV4="true" mode="ftp" verify="false">
+			<send remoteDir="${remote.public.dir}">
 				<ftpfileset dir="${deploy.dir}/${public.dirname}" dirPerm="${remote.public.dirperm}" filePerm="${remote.public.fileperm}">
 					<include name="**" />
 					<exclude name="${public.writable.dirname}/**" />
@@ -55,25 +55,25 @@
 				</ftpfileset>
 			</send>
 
-			<send remoteDir="${remote.app.dir}" depends="true">
+			<send remoteDir="${remote.app.dir}">
 				<ftpfileset dir="${deploy.dir}/${app.dirname}" dirPerm="${remote.private.dirperm}" filePerm="${remote.private.fileperm}">
 					<include name="**" />
 				</ftpfileset>
 			</send>
 
-			<send remoteDir="${remote.var.dir}" depends="true">
+			<send remoteDir="${remote.var.dir}">
 				<ftpfileset dir="${deploy.dir}/${var.dirname}" dirPerm="${remote.private.writableDirperm}" filePerm="${remote.private.writableFileperm}">
 					<include name="**" />
 				</ftpfileset>
 			</send>
 
-			<send remoteDir="${remote.lib.dir}" depends="true">
+			<send remoteDir="${remote.lib.dir}">
 				<ftpfileset dir="${deploy.dir}/${lib.dirname}" dirPerm="${remote.private.dirperm}" filePerm="${remote.private.fileperm}">
 					<include name="**" />
 				</ftpfileset>
 			</send>
 
-			<send remoteDir="${remote.vendor.dir}" depends="true">
+			<send remoteDir="${remote.vendor.dir}">
 				<ftpfileset dir="${deploy.dir}/${vendor.dirname}" dirPerm="${remote.private.dirperm}" filePerm="${remote.private.fileperm}">
 					<include name="**" />
 				</ftpfileset>
