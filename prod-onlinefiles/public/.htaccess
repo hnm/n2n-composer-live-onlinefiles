@@ -176,6 +176,8 @@ ExpiresByType image/png "access plus 1 month"
 ExpiresByType video/mp4 "access plus 1 month"
 ExpiresByType video/ogg "access plus 1 month"
 ExpiresByType video/webm "access plus 1 month"
+
+# Files/Documents
 ExpiresByType application/pdf "access plus 1 month"
 
 # Web fonts
