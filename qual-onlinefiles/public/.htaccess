@@ -139,6 +139,7 @@ AddDefaultCharset utf-8
                                       application/x-web-app-manifest+json \
                                       application/xhtml+xml \
                                       application/xml \
+                                      application/pdf \
                                       font/opentype \
                                       image/svg+xml \
                                       image/x-icon \
@@ -185,7 +186,11 @@ ExpiresByType video/mp4 "access plus 1 month"
 ExpiresByType video/ogg "access plus 1 month"
 ExpiresByType video/webm "access plus 1 month"
 
+# Files/Documents
+ExpiresByType application/pdf "access plus 1 month"
+
 # Web fonts
+ExpiresByType font/ttf "access plus 1 month"
 ExpiresByType application/font-woff "access plus 1 month"
 ExpiresByType application/font-woff2 "access plus 1 month"
 ExpiresByType application/x-font-woff "access plus 1 month"
