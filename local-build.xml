@@ -25,9 +25,6 @@
 		<exec executable="git" dir="${dir.project}">
 			<arg line="checkout-index -a -f --prefix=${dir.tmp}/"/>
 		</exec>
-		<exec executable="git" dir="${dir.tmp}">
-			<arg line="clean -f"/>
-		</exec>
 		
 		<echo message="copy to ${dir.target}" />
 
